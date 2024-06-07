@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const getData = async (userId: string): Promise<ProfileDetails> => {
   noStore();
-  const response = await fetch(`${apiUrl}/${userId}`);
+  const response = await fetch(`${apiUrl}/api/${userId}`);
   const { data } = await response.json();
   return data;
 };

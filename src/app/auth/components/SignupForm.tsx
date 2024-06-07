@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const postUser = async (userInput: IUser) => {
-  const response = await fetch(`${apiUrl}/auth/signup`, {
+  const response = await fetch(`${apiUrl}/api/auth/signup`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(userInput),

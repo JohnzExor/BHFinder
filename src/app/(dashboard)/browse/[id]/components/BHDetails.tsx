@@ -21,7 +21,7 @@ const imgLink =
 
 const getList = async (id: string): Promise<BHDetails> => {
   noStore();
-  const response = await fetch(`${apiUrl}/browse/${id}`);
+  const response = await fetch(`${apiUrl}/api/browse/${id}`);
   const { data } = await response.json();
   return data;
 };

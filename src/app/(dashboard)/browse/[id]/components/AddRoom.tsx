@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const postRoom = async (newRoom: IRoom, id: string) => {
-  const response = await fetch(`${apiUrl}/${id}`, {
+  const response = await fetch(`${apiUrl}/api/browse/${id}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(newRoom),

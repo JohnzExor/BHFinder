@@ -11,7 +11,7 @@ const postBH = async (newBH: IBHouse, file: File) => {
       cacheControl: "3600",
       upsert: true,
     });
-  const response = await fetch(`${apiUrl}/browse/`, {
+  const response = await fetch(`${apiUrl}/api/browse/`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ...newBH, imgUrl: data?.path }),

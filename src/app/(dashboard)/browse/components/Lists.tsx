@@ -9,7 +9,7 @@ const imgLink =
 
 const getLists = async (): Promise<IBHouse[]> => {
   noStore();
-  const response = await fetch(`${apiUrl}/browse`);
+  const response = await fetch(`${apiUrl}/api/browse`);
   const { data } = await response.json();
   return data;
 };
