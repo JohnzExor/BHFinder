@@ -2,13 +2,14 @@ import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { apiUrl } from "@/lib/storage";
 
 const imgLink =
   "https://mefpvvgnqqvpbqcxloyx.supabase.co/storage/v1/object/public/bHousesPictures/";
 
 const getLists = async (): Promise<IBHouse[]> => {
   noStore();
-  const response = await fetch("http://localhost:3000/api/browse");
+  const response = await fetch(`${apiUrl}/browse`);
   const { data } = await response.json();
   return data;
 };

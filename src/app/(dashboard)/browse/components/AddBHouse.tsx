@@ -1,5 +1,5 @@
 "use client";
-import supabase from "@/lib/storage";
+import supabase, { apiUrl } from "@/lib/storage";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +11,7 @@ const postBH = async (newBH: IBHouse, file: File) => {
       cacheControl: "3600",
       upsert: true,
     });
-  const response = await fetch("http://localhost:3000/api/browse/", {
+  const response = await fetch(`${apiUrl}/browse/`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ...newBH, imgUrl: data?.path }),

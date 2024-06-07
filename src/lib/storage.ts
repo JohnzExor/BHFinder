@@ -7,3 +7,5 @@ const supabase = createClient(
 );
 
 export default supabase;
+
+export const apiUrl = "https://bhfind.vercel.app";

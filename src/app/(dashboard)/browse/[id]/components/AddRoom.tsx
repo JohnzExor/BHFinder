@@ -1,10 +1,11 @@
 "use client";
+import { apiUrl } from "@/lib/storage";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const postRoom = async (newRoom: IRoom, id: string) => {
-  const response = await fetch(`http://localhost:3000/api/browse/${id}`, {
+  const response = await fetch(`${apiUrl}/${id}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(newRoom),

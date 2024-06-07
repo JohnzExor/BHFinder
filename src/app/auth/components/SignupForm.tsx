@@ -1,10 +1,11 @@
 "use client";
 
+import { apiUrl } from "@/lib/storage";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const postUser = async (userInput: IUser) => {
-  const response = await fetch("http://localhost:3000/api/auth/signup", {
+  const response = await fetch(`${apiUrl}/auth/signup`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(userInput),

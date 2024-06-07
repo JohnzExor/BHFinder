@@ -1,10 +1,11 @@
+import { apiUrl } from "@/lib/storage";
 import { unstable_noStore as noStore } from "next/cache";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Link from "next/link";
 
 const getData = async (userId: string): Promise<ProfileDetails> => {
   noStore();
-  const response = await fetch(`http://localhost:3000/api/${userId}`);
+  const response = await fetch(`${apiUrl}/${userId}`);
   const { data } = await response.json();
   return data;
 };

@@ -14,13 +14,14 @@ import { IoIosPricetags } from "react-icons/io";
 import { AiOutlineNumber } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { apiUrl } from "@/lib/storage";
 
 const imgLink =
   "https://mefpvvgnqqvpbqcxloyx.supabase.co/storage/v1/object/public/bHousesPictures/";
 
 const getList = async (id: string): Promise<BHDetails> => {
   noStore();
-  const response = await fetch(`http://localhost:3000/api/browse/${id}`);
+  const response = await fetch(`${apiUrl}/browse/${id}`);
   const { data } = await response.json();
   return data;
 };
