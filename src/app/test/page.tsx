@@ -1,10 +1,10 @@
 import React from "react";
-import SignupForm from "../components/SignupForm";
+import ImageUploader from "./components/ImageUploader";
 
 const page = () => {
   return (
     <div>
-      <SignupForm />
+      <ImageUploader />
     </div>
   );
 };

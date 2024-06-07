@@ -1,5 +1,16 @@
+type BHDetails = Response & {
+  bhouse: IBHouse;
+  rooms: IRoom[];
+  user: IUser;
+};
+
+type ProfileDetails = Response & {
+  user: IUser;
+  bHouses: IBHouse[];
+};
+
 type IUser = {
-  _id?: string;
+  id?: string;
   username?: string;
   email?: string;
   password?: string;
@@ -8,25 +19,26 @@ type IUser = {
 };
 
 type IBHouse = {
-  _id?: string;
-  user?: string;
+  id?: string;
+  userId: string;
+  imgUrl: string;
   title?: string;
   description?: string;
-  min_price?: number;
-  max_price?: number;
+  minPrice?: number;
+  maxPrice?: number;
   location?: string;
-  created_at?: Date;
-  updated_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 type IRoom = {
-  _id?: string;
-  listing?: string;
-  room_number?: string;
+  id?: string;
+  listingId: string;
+  roomNumber?: string;
   price?: number;
-  is_available?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
+  isAvailable?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 type IAuth = {

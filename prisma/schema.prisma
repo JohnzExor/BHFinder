@@ -9,6 +9,39 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String?
+  email     String?
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BHHouse {
+  id          String   @id @default(cuid())
+  userId      String
+  imgUrl      String
+  title       String?
+  description String?
+  minPrice    Float?
+  maxPrice    Float?
+  location    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  listingId   String
+  roomNumber  String?
+  price       Float?
+  isAvailable Boolean?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
