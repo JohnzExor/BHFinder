@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 const Header = () => {
-  const session = useSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
   return (
     <div
@@ -18,12 +18,14 @@ const Header = () => {
     >
       <div className="flex justify-between items-center w-full">
         <SidebarToggle />
-        {session ? (
-          <Link href={`/${session.data?.user.id}`} className="p-7">
+        {session?.user ? (
+          <Link href={`/${session.user.id}`} className="p-7">
             <FaRegUserCircle size={20} />
           </Link>
         ) : (
-          <Link href="/auth">Login</Link>
+          <Link href="/auth" className="p-7">
+            Login
+          </Link>
         )}
       </div>
     </div>
