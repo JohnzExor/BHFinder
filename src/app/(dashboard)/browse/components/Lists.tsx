@@ -20,14 +20,14 @@ const Lists = async () => {
   return (
     <div className="flex flex-col gap-2 py-4">
       <h1 className=" font-semibold px-4">The most relevant</h1>
-      <div className="w-full overflow-x-auto scroll-smooth">
+      <div className="w-full overflow-x-auto scroll-smooth pb-2">
         <div className="flex space-x-4 px-4">
           {data.map(
             ({ id, imgUrl, title, location, minPrice, maxPrice }, index) => (
               <Link
                 href={`/browse/${id}`}
                 key={index}
-                className="bg-white rounded-3xl shadow-sm w-full max-w-[300px] flex-shrink-0"
+                className="bg-white rounded-3xl shadow-sm w-full max-w-[300px] flex-shrink-0 dark:bg-zinc-900"
               >
                 <div className="relative h-52 w-full">
                   <Image

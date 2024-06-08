@@ -8,6 +8,7 @@ import { CiLogout } from "react-icons/ci";
 import { Separator } from "../ui/separator";
 import { useSession } from "next-auth/react";
 import Navigations from "./Navigations";
+import { ModeToggle } from "../theme/theme-toggle";
 
 const Sidebar = () => {
   const { data: session } = useSession();
@@ -15,9 +16,13 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col gap-4 h-full">
       <div className=" text-3xl">BH FINDER</div>
+      <div className="flex items-center gap-2">
+        <ModeToggle />
+        Theme
+      </div>
       <div>
         <div className="text-muted-foreground text-sm mb-2">Your Profile</div>
-        <div className=" bg-black bg-opacity-5 rounded-xl p-3">
+        <div className=" bg-green-300 bg-opacity-35 rounded-xl p-3">
           {session ? (
             <Link href={`/${session.user.id}`}>
               <div className="flex items-center gap-2">

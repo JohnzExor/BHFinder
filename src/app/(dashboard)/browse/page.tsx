@@ -6,9 +6,8 @@ import AddBHouse from "./components/AddBHouse";
 const page = () => {
   return (
     <div>
-      <div className="  h-full w-full -z-10 fixed bg-gradient-to-t from-zinc-300"></div>
+      <div className="  h-full w-full -z-10 fixed bg-gradient-to-t from-zinc-300 dark:from-transparent"></div>
       <Search />
-      <AddBHouse />
       <Suspense fallback={<>Loading</>}>
         <Lists />
       </Suspense>

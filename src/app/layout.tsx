@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { AuthProvider } from "@/providers/session-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const inter = Roboto({ subsets: ["latin"], weight: ["300"] });
 
@@ -25,11 +26,18 @@ const RootLayout = async ({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <main className="flex flex-col h-screen ">
-            <Header />
-            {children}
-            <Footer />
-          </main>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="flex flex-col h-screen ">
+              <Header />
+              {children}
+              <Footer />
+            </main>
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

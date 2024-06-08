@@ -1,5 +1,4 @@
 import { unstable_noStore as noStore } from "next/cache";
-import AddRoom from "./AddRoom";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IoLocationSharp } from "react-icons/io5";
@@ -33,14 +32,16 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
   const { title, userId, location, description, imgUrl } = bhouse;
   return (
     <div>
-      <div className="relative w-full h-[350px] -mt-24">
+      <div className="relative w-full h-[200px] -mt-24">
         <Image
           src={`${imgLink}${imgUrl}`}
           alt={imgUrl}
           fill
           className=" rounded-b-[40px] object-cover"
         />
+        <div className=" w-full h-full bg-gradient-to-b from-neutral-950 z-10 absolute"></div>
       </div>
+
       <div className="p-6 flex flex-col gap-4">
         <div className="flex gap-1">
           <IoLocationSharp />
@@ -63,7 +64,7 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
         </div>
         <p className="p-2 text-sm">{description}</p>
 
-        <AddRoom listingId={bHouseID} userId={userId} />
+        {/* <AddRoom listingId={bHouseID} userId={userId} /> */}
 
         <div className=" font-semibold">Available Rooms</div>
         <div className="flex flex-col gap-2">
