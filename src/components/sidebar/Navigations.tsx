@@ -41,7 +41,7 @@ const Navigations = () => {
             href={link}
             key={index}
             className={clsx("flex items-center gap-2 p-3 rounded-xl", {
-              " bg-black bg-opacity-5":
+              " bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5":
                 pathname === link ||
                 (link !== "/" && pathname.startsWith(link)),
             })}

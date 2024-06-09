@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { AuthProvider } from "@/providers/session-provider";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Roboto({ subsets: ["latin"], weight: ["300"] });
 
@@ -23,22 +24,23 @@ const RootLayout = async ({
   const session = await getServerSession(authOptions);
   console.log(session);
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
             <main className="flex flex-col h-screen ">
               <Header />
               {children}
               <Footer />
             </main>
-          </ThemeProvider>
-        </AuthProvider>
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

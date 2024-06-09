@@ -10,7 +10,7 @@ export const BHDetailsFallback = () => (
           <Skeleton className=" w-full h-[20px]" />
           <Skeleton className=" w-20 h-[15px]" />
         </div>
-        <Skeleton className=" rounded-full h-14 w-16" />
+        <Skeleton className=" rounded-full h-14 w-[70px]" />
       </div>
       <Skeleton className=" w-full h-[250px]" />
     </div>

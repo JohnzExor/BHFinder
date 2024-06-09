@@ -60,7 +60,6 @@ export const postUserData = async (userData: IUser) => {
 export const postUserSignOut = async () => {
   try {
     await signOut();
-    alert("Sign out");
   } catch (error) {
     throw error;
   }
