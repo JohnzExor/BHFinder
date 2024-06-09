@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { AiOutlineLoading } from "react-icons/ai";
 import Link from "next/link";
 import { formSchema } from "@/lib/zodSchema";
+import { ToastWithTitle } from "@/components/alert/Alert";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -40,6 +41,7 @@ const LoginForm = () => {
     });
 
     if (res?.ok) {
+      ToastWithTitle("Login success.");
       router.push("/");
     }
   };

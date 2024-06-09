@@ -2,6 +2,7 @@ import prisma from "@/lib/db";
 import { signOut } from "next-auth/react";
 
 import { compare, hash } from "bcryptjs";
+import { ToastWithTitle } from "@/components/alert/Alert";
 
 export const getUserProfile = async (id: string | undefined) => {
   try {
@@ -60,6 +61,7 @@ export const postUserData = async (userData: IUser) => {
 export const postUserSignOut = async () => {
   try {
     await signOut();
+    ToastWithTitle("Signout success.");
   } catch (error) {
     throw error;
   }

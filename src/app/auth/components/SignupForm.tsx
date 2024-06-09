@@ -21,6 +21,7 @@ import { z } from "zod";
 import { AiOutlineLoading } from "react-icons/ai";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { ToastWithTitle } from "@/components/alert/Alert";
 
 const postUser = async (userInput: IUser) => {
   const response = await fetch(`${apiUrl}/api/auth/signup`, {
@@ -49,12 +50,14 @@ const SignupForm = () => {
     console.log(res);
 
     if (res?.ok) {
+      ToastWithTitle("Account created.");
       const signin = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
       if (signin?.ok) {
+        ToastWithTitle("Login success.");
         router.push("/");
       }
     }

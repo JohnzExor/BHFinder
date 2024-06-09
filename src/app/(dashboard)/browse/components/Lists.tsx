@@ -18,7 +18,7 @@ const Lists = async () => {
   const data = await getLists();
 
   return (
-    <div className="flex flex-col gap-2 py-4">
+    <div className="flex flex-col gap-2 ">
       <h1 className=" font-semibold px-4">The most relevant</h1>
       <div className="w-full overflow-x-auto scroll-smooth pb-2">
         <div className="flex space-x-4 px-4">

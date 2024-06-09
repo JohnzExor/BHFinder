@@ -5,6 +5,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import Link from "next/link";
 import { apiUrl } from "@/lib/storage";
 import Rooms from "./Rooms";
+import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 
 const imgLink =
   "https://mefpvvgnqqvpbqcxloyx.supabase.co/storage/v1/object/public/bHousesPictures/";
@@ -33,7 +34,15 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
         <div className=" w-full h-full bg-gradient-to-b from-neutral-950 z-10 absolute"></div>
       </div>
 
-      <div className="p-6 flex flex-col gap-4">
+      <BreadCrumb
+        list={[
+          { link: "/", name: "Home" },
+          { link: "/browse", name: "Browse" },
+          { link: `/browse/${id}`, name: `${title}` },
+        ]}
+      />
+
+      <div className="px-6 flex flex-col gap-4">
         <div className="flex gap-1">
           <IoLocationSharp />
           <p className=" text-muted-foreground text-sm">{location}</p>
