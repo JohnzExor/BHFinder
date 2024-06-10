@@ -1,7 +1,7 @@
 "use client";
 
 import { apiUrl } from "@/lib/storage";
-import { formSchema } from "@/lib/zodSchema";
+import { authSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -36,30 +36,37 @@ const postUser = async (userInput: IUser) => {
 const SignupForm = () => {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof authSchema>>({
+    resolver: zodResolver(authSchema),
     defaultValues: {
       username: "",
       email: "",
       password: "",
+      confirm_password: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof authSchema>) => {
+    if (values.password !== values.confirm_password) {
+      return ToastWithTitle("Password dont match");
+    }
     const res = await postUser(values);
     console.log(res);
 
-    if (res?.ok) {
-      ToastWithTitle("Account created.");
-      const signin = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      });
-      if (signin?.ok) {
-        ToastWithTitle("Login success.");
-        router.push("/");
-      }
+    if (!res?.ok) {
+      return ToastWithTitle(res.message);
+    }
+
+    ToastWithTitle("Account created.");
+    const signin = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false,
+    });
+
+    if (signin?.ok) {
+      ToastWithTitle("Login success.");
+      router.push("/");
     }
   };
   return (
@@ -116,6 +123,24 @@ const SignupForm = () => {
                 <Input
                   type="password"
                   placeholder="Enter your password"
+                  {...field}
+                  disabled={form.formState.isSubmitting}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="confirm_password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Confirm your password"
                   {...field}
                   disabled={form.formState.isSubmitting}
                 />

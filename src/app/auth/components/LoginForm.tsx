@@ -19,31 +19,32 @@ import { Input } from "@/components/ui/input";
 
 import { AiOutlineLoading } from "react-icons/ai";
 import Link from "next/link";
-import { formSchema } from "@/lib/zodSchema";
+import { authSchema } from "@/lib/zodSchema";
 import { ToastWithTitle } from "@/components/alert/Alert";
 
 const LoginForm = () => {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof authSchema>>({
+    resolver: zodResolver(authSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async ({ email, password }: z.infer<typeof formSchema>) => {
+  const onSubmit = async ({ email, password }: z.infer<typeof authSchema>) => {
     const res = await signIn("credentials", {
       email: email,
       password: password,
       redirect: false,
     });
 
-    if (res?.ok) {
-      ToastWithTitle("Login success.");
-      router.push("/");
+    if (!res?.ok) {
+      return ToastWithTitle("Invalid password/email");
     }
+    ToastWithTitle("Login success.");
+    router.push("/");
   };
   return (
     <Form {...form}>

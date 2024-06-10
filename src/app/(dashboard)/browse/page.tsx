@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import Lists from "./components/Lists";
 import Search from "./components/Search";
-import AddBHouse from "./components/AddBHouse";
 import { BrowseBHouseFallback } from "./components/ui/Fallbacks";
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 

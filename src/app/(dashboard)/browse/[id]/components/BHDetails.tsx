@@ -6,6 +6,8 @@ import Link from "next/link";
 import { apiUrl } from "@/lib/storage";
 import Rooms from "./Rooms";
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
+import AddRoomToggle from "./AddRoomToggle";
+import { useSession } from "next-auth/react";
 
 const imgLink =
   "https://mefpvvgnqqvpbqcxloyx.supabase.co/storage/v1/object/public/bHousesPictures/";
@@ -22,6 +24,7 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
 
   const { username, id } = user;
   const { title, userId, location, description, imgUrl } = bhouse;
+
   return (
     <div>
       <div className="relative w-full h-[200px] -mt-24">
@@ -64,8 +67,12 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
         </div>
         <p className="p-2 text-sm">{description}</p>
 
-        {/* <AddRoom listingId={bHouseID} userId={userId} /> */}
-        <Rooms title={title} rooms={rooms} />
+        <div className=" font-semibold flex items-center justify-between">
+          <label>Available Rooms</label>
+          <AddRoomToggle listingId={bHouseID} userId={userId} />
+        </div>
+
+        <Rooms authorId={userId} title={title} rooms={rooms} />
       </div>
     </div>
   );

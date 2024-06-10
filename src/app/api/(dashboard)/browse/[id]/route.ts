@@ -24,9 +24,21 @@ export async function POST(request: Request, { params }: { params: Params }) {
     );
   }
   const post = await postRoom({ listingId, roomNumber, price, isAvailable });
+
+  if (!post) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Something Error",
+        data: post,
+      },
+      { status: 200 }
+    );
+  }
   return NextResponse.json(
     {
       ok: true,
+      message: "Added successfully",
       data: post,
     },
     { status: 200 }

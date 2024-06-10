@@ -38,15 +38,22 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
+export const checkUserEmail = async (email: string) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: { email: email },
+    });
+
+    if (user) {
+      return user;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const postUserData = async (userData: IUser) => {
   try {
-    const checkEmail = await prisma.user.findFirst({
-      where: { email: userData.email },
-    });
-    if (checkEmail) {
-      return null;
-    }
-
     const hashPWD = await hash(userData.password as string, 10);
 
     const data = await prisma.user.create({

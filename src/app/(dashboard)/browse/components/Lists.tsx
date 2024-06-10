@@ -22,32 +22,34 @@ const Lists = async () => {
       <h1 className=" font-semibold px-4">The most relevant</h1>
       <div className="w-full overflow-x-auto scroll-smooth pb-2">
         <div className="flex space-x-4 px-4">
-          {data.map(
-            ({ id, imgUrl, title, location, minPrice, maxPrice }, index) => (
-              <Link
-                href={`/browse/${id}`}
-                key={index}
-                className="bg-white rounded-3xl shadow-sm w-full max-w-[300px] flex-shrink-0 dark:bg-zinc-900"
-              >
-                <div className="relative h-52 w-full">
-                  <Image
-                    src={`${imgLink}${imgUrl}`}
-                    alt={imgUrl}
-                    layout="fill"
-                    className="rounded-3xl object-cover"
-                  />
-                </div>
+          {data
+            .reverse()
+            .map(
+              ({ id, imgUrl, title, location, minPrice, maxPrice }, index) => (
+                <Link
+                  href={`/browse/${id}`}
+                  key={index}
+                  className="bg-white rounded-3xl shadow-sm w-full max-w-[300px] flex-shrink-0 dark:bg-zinc-900"
+                >
+                  <div className="relative h-52 w-full">
+                    <Image
+                      src={`${imgLink}${imgUrl}`}
+                      alt={imgUrl}
+                      layout="fill"
+                      className="rounded-3xl object-cover"
+                    />
+                  </div>
 
-                <div className="p-4">
-                  <h1 className="text-sm font-bold">{title}</h1>
-                  <p className="text-muted-foreground text-xs">{location}</p>
-                  <p className="text-muted-foreground text-xs">
-                    {minPrice} - {maxPrice}
-                  </p>
-                </div>
-              </Link>
-            )
-          )}
+                  <div className="p-4">
+                    <h1 className="text-sm font-bold">{title}</h1>
+                    <p className="text-muted-foreground text-xs">{location}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {minPrice} - {maxPrice}
+                    </p>
+                  </div>
+                </Link>
+              )
+            )}
         </div>
       </div>
     </div>

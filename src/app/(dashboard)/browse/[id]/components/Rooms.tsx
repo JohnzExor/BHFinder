@@ -11,17 +11,21 @@ import { ToastWithTitle } from "@/components/alert/Alert";
 import { AiOutlineNumber } from "react-icons/ai";
 import { IoIosPricetags } from "react-icons/io";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const Rooms = ({
+  authorId,
   title,
   rooms,
 }: {
+  authorId: string;
   title: string | undefined;
   rooms: IRoom[];
 }) => {
+  const { data: session } = useSession();
+  const isAuthor = session?.user.id === authorId;
   return (
     <div className=" space-y-2">
-      <div className=" font-semibold">Available Rooms</div>
       {rooms.length > 0 ? (
         <div className="flex flex-col gap-2">
           {rooms.map(({ roomNumber, price, isAvailable }, index) => (
@@ -63,9 +67,15 @@ const Rooms = ({
                   </div>
                 </div>
                 <DrawerFooter className="flex flex-col gap-2">
-                  <Button onClick={() => ToastWithTitle("Not yet working.")}>
-                    Book
-                  </Button>
+                  {isAuthor ? (
+                    <Button onClick={() => ToastWithTitle("Not yet working.")}>
+                      Delete
+                    </Button>
+                  ) : (
+                    <Button onClick={() => ToastWithTitle("Not yet working.")}>
+                      Book
+                    </Button>
+                  )}
                   <DrawerClose asChild>
                     <Button variant={"secondary"}>Close</Button>
                   </DrawerClose>

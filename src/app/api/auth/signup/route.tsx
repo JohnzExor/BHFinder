@@ -1,4 +1,4 @@
-import { postUserData } from "@/services/User.service";
+import { checkUserEmail, postUserData } from "@/services/User.service";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -7,6 +7,15 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { ok: true, message: "Fill the blanks" },
       { status: 203 }
+    );
+  }
+
+  const existing = await checkUserEmail(email);
+
+  if (existing) {
+    return NextResponse.json(
+      { ok: false, message: "Email already exists" },
+      { status: 200 }
     );
   }
 
