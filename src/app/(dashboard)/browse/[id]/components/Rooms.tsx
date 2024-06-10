@@ -28,7 +28,7 @@ const Rooms = ({
     <div className=" space-y-2">
       {rooms.length > 0 ? (
         <div className="flex flex-col gap-2">
-          {rooms.map(({ roomNumber, price, isAvailable }, index) => (
+          {rooms.reverse().map(({ roomNumber, price, isAvailable }, index) => (
             <Drawer key={index}>
               <DrawerTrigger
                 disabled={!isAvailable}

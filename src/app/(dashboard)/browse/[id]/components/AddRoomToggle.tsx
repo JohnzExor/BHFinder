@@ -12,7 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import AddRoom from "./AddRoom";
 import { FaRegPlusSquare } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const AddRoomToggle = ({
   listingId,
@@ -22,37 +23,40 @@ const AddRoomToggle = ({
   userId: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   const handleDialog = () => {
     setIsOpen(false);
   };
 
+  const isAuthor = userId === session?.user.id;
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant={"ghost"}>
-          <FaRegPlusSquare size={20} />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Add Room</DialogTitle>
-          <DialogDescription>
-            Anyone will be able to see this room
-          </DialogDescription>
-        </DialogHeader>
-        <AddRoom
-          listingId={listingId}
-          userId={userId}
-          whenDone={handleDialog}
-        />
-        <DialogClose asChild>
-          <Button type="button" variant="secondary" className="-mt-2">
-            Close
-          </Button>
-        </DialogClose>
-      </DialogContent>
-    </Dialog>
+    <React.Fragment>
+      {isAuthor ? (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button variant={"ghost"}>
+              <FaRegPlusSquare size={20} />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Add Room</DialogTitle>
+              <DialogDescription>
+                Anyone will be able to see this room
+              </DialogDescription>
+            </DialogHeader>
+            <AddRoom listingId={listingId} whenDone={handleDialog} />
+            <DialogClose asChild>
+              <Button type="button" variant="secondary" className="-mt-2">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
+      ) : null}
+    </React.Fragment>
   );
 };
 
