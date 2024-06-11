@@ -6,7 +6,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_API_KEY as string
 );
 
-// export const apiUrl = "https://bhfind.vercel.app";
-export const apiUrl = "http://localhost:3000";
+export const apiUrl = "https://bhfind.vercel.app";
+// export const apiUrl = "http://localhost:3000";
 
 export default supabase;

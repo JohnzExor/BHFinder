@@ -30,7 +30,7 @@ const postBH = async (newBH: IBHouse, file: File) => {
       cacheControl: "3600",
       upsert: true,
     });
-  const response = await fetch(`${apiUrl}/api/browse/`, {
+  const response = await fetch(`${apiUrl}/api/manage/add/`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ...newBH, imgUrl: data?.path }),
@@ -63,6 +63,7 @@ const AddBHouse = () => {
       setFile(file);
     }
   };
+
   const onSubmit = async (values: z.infer<typeof bHouseSchema>) => {
     const newValues = {
       ...values,
@@ -71,14 +72,17 @@ const AddBHouse = () => {
       maxPrice: parseFloat(values.maxPrice),
     };
 
-    if (file) {
-      const res = await postBH(newValues, file);
-      if (res.ok) {
-        console.log(res);
-        ToastWithTitle("Posted successfully");
-        router.push(`/${res.data.userId}`);
-      }
+    if (!file) {
+      return ToastWithTitle("No image attachment");
     }
+
+    const res = await postBH(newValues, file);
+    if (!res.ok) {
+      return ToastWithTitle(res.message);
+    }
+
+    ToastWithTitle("Posted successfully");
+    router.push(`/${res.data.userId}`);
   };
 
   return (

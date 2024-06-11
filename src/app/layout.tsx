@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
@@ -9,7 +9,7 @@ import { AuthProvider } from "@/providers/session-provider";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Roboto({ subsets: ["latin"], weight: ["300"] });
+const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BH Finder",
@@ -25,7 +25,7 @@ const RootLayout = async ({
   console.log(session);
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

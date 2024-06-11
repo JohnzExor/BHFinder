@@ -1,15 +1,17 @@
 import { apiUrl } from "@/lib/storage";
 import { unstable_noStore as noStore } from "next/cache";
-import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { notFound } from "next/navigation";
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
+import UserStatistics from "./UserStatistics";
+import BHList from "./BHList";
 
 const getData = async (userId: string): Promise<ProfileDetails> => {
   noStore();
   const response = await fetch(`${apiUrl}/api/${userId}`);
   const { data } = await response.json();
+  console.log(data);
   return data;
 };
 
@@ -38,14 +40,9 @@ const Profile = async ({ userId }: { userId: string }) => {
           <h1 className=" font-semibold text-3xl">{username}</h1>
           <p className=" text-sm text-muted-foreground">{email}</p>
         </div>
-        <div>
-          {bHouses.map(({ id, title }, index) => (
-            <Link href={`/browse/${id}`} key={index}>
-              {title}
-            </Link>
-          ))}
-        </div>
       </div>
+      <UserStatistics bHouses={bHouses} />
+      <BHList bHouses={bHouses} profileId={userId} />
     </div>
   );
 };

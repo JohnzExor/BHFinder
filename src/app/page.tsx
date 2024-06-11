@@ -14,7 +14,7 @@ const page = async () => {
       </p>
       <Link
         href="/browse"
-        className=" bg-muted-foreground py-2 w-full rounded-3xl flex items-center justify-center gap-2 text-white"
+        className="py-2 w-full rounded-2xl flex items-center justify-center gap-2 text-white bg-zinc-900"
       >
         <IoIosBrowsers size={20} />
         Browse
