@@ -13,6 +13,11 @@ const BHList = ({
   profileId: string;
 }) => {
   const { data: session } = useSession();
+  const reversedList = [...bHouses].reverse();
+
+  const dateCounter = (date: Date | undefined) => {
+    return moment(date).startOf("hour").fromNow();
+  };
   return (
     <div className="px-6">
       <div className="flex items-center justify-between mx-4">
@@ -25,40 +30,31 @@ const BHList = ({
       </div>
       <div className="grid grid-cols-2 gap-2 py-2">
         {bHouses.length > 0 ? (
-          bHouses
-            .reverse()
-            .map(({ id, title, createdAt, updatedAt }, index) => (
-              <Link
-                href={`/browse/${id}`}
-                key={index}
-                className="border p-4 rounded-2xl shadow-md"
-              >
-                <h1 className="font-medium">{title}</h1>
-                <div className=" text-muted-foreground text-sm">
-                  {createdAt === updatedAt ? (
+          reversedList.map(({ id, title, createdAt, updatedAt }, index) => (
+            <Link
+              href={`/browse/${id}`}
+              key={index}
+              className="border p-4 rounded-2xl shadow-md"
+            >
+              <h1 className="font-medium">{title}</h1>
+              <div className=" text-muted-foreground text-sm">
+                {createdAt === updatedAt ? (
+                  <p>
+                    Created: <span>{dateCounter(createdAt)}</span>
+                  </p>
+                ) : (
+                  <div>
                     <p>
-                      Created:{" "}
-                      <span>{moment(createdAt).startOf("hour").fromNow()}</span>
+                      Created: <span>{dateCounter(createdAt)}</span>
                     </p>
-                  ) : (
-                    <div>
-                      <p>
-                        Created:{" "}
-                        <span>
-                          {moment(createdAt).startOf("hour").fromNow()}
-                        </span>
-                      </p>
-                      <p>
-                        Updated:{" "}
-                        <span>
-                          {moment(updatedAt).startOf("hour").fromNow()}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))
+                    <p>
+                      Updated: <span>{dateCounter(updatedAt)}</span>
+                    </p>
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))
         ) : (
           <div className="text-center text-muted-foreground text-sm">
             No boarding houses

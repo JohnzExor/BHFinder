@@ -10,12 +10,6 @@ import { useSession } from "next-auth/react";
 
 const navigations = [
   {
-    name: "Home",
-    link: "/",
-    icon: <FaHome size={25} />,
-    session: false,
-  },
-  {
     name: "Browse",
     link: "/browse",
     icon: <IoIosBrowsers size={25} />,

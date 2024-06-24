@@ -27,14 +27,14 @@ const BHDetails = async ({ bHouseID }: { bHouseID: string }) => {
 
   return (
     <div>
-      <div className="relative w-full h-[200px] -mt-24">
+      <div className="relative w-full h-[200px] -mt-24 md:-mt-0">
         <Image
           src={`${imgLink}${imgUrl}`}
           alt={imgUrl}
           fill
-          className=" rounded-b-[40px] object-cover"
+          className=" rounded-b-[40px] object-cover md:rounded-t-[40px]"
         />
-        <div className=" w-full h-full bg-gradient-to-b from-neutral-950 z-10 absolute"></div>
+        <div className=" w-full h-full bg-gradient-to-b from-neutral-950 z-10 absolute  rounded-b-[40px] md:rounded-t-[40px]"></div>
       </div>
 
       <BreadCrumb

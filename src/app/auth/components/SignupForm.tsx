@@ -33,7 +33,7 @@ const postUser = async (userInput: IUser) => {
   return data;
 };
 
-const SignupForm = () => {
+const SignupForm = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof authSchema>>({
@@ -66,7 +66,7 @@ const SignupForm = () => {
 
     if (signin?.ok) {
       ToastWithTitle("Login success.");
-      router.push("/");
+      router.push("/browse");
     }
   };
   return (
@@ -160,9 +160,15 @@ const SignupForm = () => {
             "Register"
           )}
         </Button>
-        <p className=" text-sm text-center">
+        <p className=" text-sm text-center flex items-center justify-center gap-1">
           Already have an account?
-          <Link href="/auth" className=" font-semibold">
+          <span
+            onClick={() => (onClick ? onClick() : null)}
+            className="font-semibold hidden md:block cursor-pointer"
+          >
+            Login here
+          </span>
+          <Link href="/auth" className=" font-semibold md:hidden">
             {" "}
             Login here
           </Link>

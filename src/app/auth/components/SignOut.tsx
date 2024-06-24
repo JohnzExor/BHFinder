@@ -13,11 +13,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { CiLogout } from "react-icons/ci";
 
 const SignOut = () => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>Logout</AlertDialogTrigger>
+      <AlertDialogTrigger>
+        <CiLogout size={25} />
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

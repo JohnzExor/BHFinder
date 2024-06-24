@@ -9,6 +9,10 @@ type ProfileDetails = Response & {
   bHouses: IBHouse[];
 };
 
+type LandingStatistics = Response & {
+  data: [{ name: string; count: number }];
+};
+
 type IUser = {
   id?: string;
   username?: string;

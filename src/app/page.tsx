@@ -1,33 +1,22 @@
+import Footer from "@/components/Footer";
+import LandingText from "@/components/landingpage/LandingText";
+import Statistics from "@/components/landingpage/Statistics";
+import { ModeToggle } from "@/components/theme/theme-toggle";
+import { Separator } from "@/components/ui/separator";
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { IoIosBrowsers } from "react-icons/io";
 
 const page = async () => {
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <h1 className=" text-7xl">Boarding House Finder</h1>
-      <p className="text-sm text-muted-foreground p-2">
-        Discover a wide selection of boarding houses available for booking
-        today. Explore various options and secure your accommodations in these
-        cozy residences for your upcoming stay.
-      </p>
-      <Link
-        href="/browse"
-        className="py-2 w-full rounded-2xl flex items-center justify-center gap-2 text-white bg-zinc-900"
-      >
-        <IoIosBrowsers size={20} />
-        Browse
-      </Link>
-      <div className="mt-4">
-        <Image
-          src="/landing.jpg"
-          height={1000}
-          width={1000}
-          alt="s"
-          className="rounded-3xl"
-        />
+    <div className="flex flex-col w-full px-4 pt-4 h-screen md:items-center md:px-20 md:pt-20">
+      <div className=" ml-auto">
+        <ModeToggle />
       </div>
+      <div className=" space-y-4 p-3 w-full max-w-[1000px]">
+        <LandingText />
+        <Separator />
+        <Statistics />
+      </div>
+      <Footer />
     </div>
   );
 };

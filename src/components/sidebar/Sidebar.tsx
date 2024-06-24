@@ -4,7 +4,6 @@ import SignOut from "@/app/auth/components/SignOut";
 import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CiLogout } from "react-icons/ci";
 import { Separator } from "../ui/separator";
 import { useSession } from "next-auth/react";
 import Navigations from "./Navigations";
@@ -14,9 +13,9 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <div className=" text-3xl">BH FINDER</div>
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col gap-4 h-full w-full">
+      <div className=" text-3xl md:hidden">BH FINDER</div>
+      <div className="flex items-center gap-2 md:hidden">
         <ModeToggle />
         Theme
       </div>
@@ -47,11 +46,11 @@ const Sidebar = () => {
       </div>
       <Separator />
       <Navigations />
-      <div className="mt-auto">
+      <div className="mt-auto md:hidden">
         {session ? (
           <div className="flex items-center gap-2">
-            <CiLogout size={25} />
             <SignOut />
+            Logout
           </div>
         ) : null}
       </div>

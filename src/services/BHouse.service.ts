@@ -63,3 +63,35 @@ export const postRoom = async (newRoom: IRoom) => {
     throw error;
   }
 };
+
+export const getStatistics = async () => {
+  try {
+    const bhouses = await prisma.bHHouse.count({});
+    const users = await prisma.user.count({});
+    const rooms = await prisma.room.count({ where: { isAvailable: true } });
+
+    const data = [
+      {
+        name: "Registered Users",
+        count: users,
+      },
+      {
+        name: "Boardng Houses",
+        count: bhouses,
+      },
+
+      {
+        name: "Available Rooms",
+        count: rooms,
+      },
+    ];
+
+    if (data) {
+      return data;
+    }
+
+    return null;
+  } catch (error) {
+    throw error;
+  }
+};

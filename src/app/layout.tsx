@@ -33,11 +33,7 @@ const RootLayout = async ({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <main className="flex flex-col h-screen ">
-              <Header />
-              {children}
-              <Footer />
-            </main>
+            <main>{children}</main>
             <Toaster />
           </AuthProvider>
         </ThemeProvider>

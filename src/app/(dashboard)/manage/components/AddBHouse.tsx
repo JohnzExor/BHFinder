@@ -83,6 +83,7 @@ const AddBHouse = () => {
 
     ToastWithTitle("Posted successfully");
     router.push(`/${res.data.userId}`);
+    router.refresh();
   };
 
   return (

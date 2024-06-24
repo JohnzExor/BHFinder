@@ -22,7 +22,7 @@ import Link from "next/link";
 import { authSchema } from "@/lib/zodSchema";
 import { ToastWithTitle } from "@/components/alert/Alert";
 
-const LoginForm = () => {
+const LoginForm = ({ onClick }: { onClick?: () => void }) => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof authSchema>>({
@@ -44,7 +44,7 @@ const LoginForm = () => {
       return ToastWithTitle("Invalid password/email");
     }
     ToastWithTitle("Login success.");
-    router.push("/");
+    router.push("/browse");
   };
   return (
     <Form {...form}>
@@ -97,9 +97,15 @@ const LoginForm = () => {
             "Login"
           )}
         </Button>
-        <p className=" text-sm text-center">
+        <p className=" text-sm text-center flex items-center justify-center gap-1">
           Don&apos;t have an account?
-          <Link href="/auth/signup" className=" font-semibold">
+          <span
+            onClick={() => (onClick ? onClick() : null)}
+            className="font-semibold hidden md:block cursor-pointer"
+          >
+            Signup Here
+          </span>
+          <Link href="/auth/signup" className=" font-semibold md:hidden">
             {" "}
             Signup Here
           </Link>
